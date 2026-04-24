@@ -1,0 +1,44 @@
+{
+  "temas": [
+    {
+      "nome": "Regulação do Banco Central para fintechs",
+      "slug": "regulacao-bacen",
+      "palavras_chave": ["Banco Central fintech", "IP instituição pagamento", "SCD SEP", "licença BCB fintech", "resolução BCB"]
+    },
+    {
+      "nome": "Open Finance e dados financeiros",
+      "slug": "open-finance",
+      "palavras_chave": ["Open Finance Brasil", "compartilhamento dados financeiros", "iniciador pagamento", "PISP", "regulação open banking"]
+    },
+    {
+      "nome": "PIX e meios de pagamento",
+      "slug": "pix-pagamentos",
+      "palavras_chave": ["PIX regulação", "PIX automático", "meios pagamento Brasil", "arranjo pagamento", "gateway pagamento regulação"]
+    },
+    {
+      "nome": "Crédito digital e BNPL",
+      "slug": "credito-digital",
+      "palavras_chave": ["fintech crédito", "BNPL Brasil", "crédito consignado digital", "peer-to-peer lending", "empréstimo app"]
+    },
+    {
+      "nome": "Compliance e PLD em fintechs",
+      "slug": "compliance-pld",
+      "palavras_chave": ["PLD fintech", "COAF fintech", "compliance bancário", "KYC fintech", "prevenção lavagem dinheiro"]
+    },
+    {
+      "nome": "Tributação de fintechs",
+      "slug": "tributacao-fintech",
+      "palavras_chave": ["tributação fintech", "IOF fintech", "imposto pagamento digital", "ISS fintech", "tributos serviços financeiros"]
+    },
+    {
+      "nome": "Investimento e captação em fintechs",
+      "slug": "investimento-fintech",
+      "palavras_chave": ["venture capital fintech", "rodada fintech Brasil", "IPO fintech", "aquisição fintech", "M&A setor financeiro"]
+    },
+    {
+      "nome": "Seguros digitais (insurtech)",
+      "slug": "insurtech",
+      "palavras_chave": ["insurtech Brasil", "SUSEP fintech", "seguro digital regulação", "microsseguro", "resseguro digital"]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "rss_feeds": [
+    {"nome": "Valor Econômico Finanças", "url": "https://valor.globo.com/financas/rss/"},
+    {"nome": "InfoMoney", "url": "https://www.infomoney.com.br/feed/"},
+    {"nome": "Finsiders", "url": "https://finsiders.com.br/feed/"},
+    {"nome": "Neofeed", "url": "https://neofeed.com.br/feed/"},
+    {"nome": "Exame Negócios", "url": "https://exame.com/negocios/feed/"},
+    {"nome": "Startupi", "url": "https://startupi.com.br/feed/"},
+    {"nome": "Valor Econômico Empresas", "url": "https://valor.globo.com/empresas/rss/"}
+  ]
+}

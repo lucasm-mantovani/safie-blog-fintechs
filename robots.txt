@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fintechs.safie.blog.br/sitemap.xml

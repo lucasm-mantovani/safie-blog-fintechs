@@ -1,0 +1,452 @@
+"""
+buscar_noticia.py — Fase 3 do pipeline diário
+
+Fluxo:
+  1. Para cada tema em config/temas.json, busca notícias via Apify Google News Scraper
+  2. Filtra resultados das últimas 48h
+  3. Seleciona a notícia mais relevante (sem repetir histórico dos últimos 15 dias)
+  4. Se Apify falhar (limite esgotado ou erro) → fallback para RSS
+  5. Se RSS também falhar → retorna tema evergreen para gerar artigo sem notícia
+  6. Registra consumo em dados/consumo_apify.json
+
+Uso:
+  python3 scripts/buscar_noticia.py
+  python3 scripts/buscar_noticia.py --forcar-rss   (pula Apify, usa só RSS)
+  python3 scripts/buscar_noticia.py --tema regulacao-bacen  (busca apenas 1 tema)
+
+Saída: imprime JSON com a notícia selecionada (ou instrução evergreen)
+"""
+
+import json
+import os
+import sys
+import argparse
+import logging
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from typing import Optional, List, Dict, Any
+
+import requests
+import feedparser
+from dotenv import load_dotenv
+from apify_client import ApifyClient
+
+# ── Caminhos ──────────────────────────────────────────────────────────────────
+BASE = Path(__file__).resolve().parent.parent
+CONFIG_BLOG    = BASE / "config" / "blog.json"
+CONFIG_TEMAS   = BASE / "config" / "temas.json"
+CONFIG_FONTES  = BASE / "config" / "fontes.json"
+HISTORICO      = BASE / "dados" / "historico_noticias.json"
+CONSUMO_APIFY  = BASE / "dados" / "consumo_apify.json"
+LOG_DIR        = BASE / "logs"
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+LOG_DIR.mkdir(exist_ok=True)
+hoje = datetime.now().strftime("%Y-%m-%d")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_DIR / f"busca_{hoje}.log", encoding="utf-8"),
+        logging.StreamHandler(sys.stdout),
+    ],
+)
+log = logging.getLogger(__name__)
+
+# ── Carregar .env ─────────────────────────────────────────────────────────────
+load_dotenv(BASE / ".env")
+load_dotenv(Path.home() / ".zshrc", override=False)
+
+APIFY_TOKEN = os.getenv("APIFY_TOKEN", "")
+
+
+# ── Helpers de arquivo ────────────────────────────────────────────────────────
+
+def ler_json(caminho: Path, padrao):
+    if caminho.exists():
+        try:
+            return json.loads(caminho.read_text(encoding="utf-8"))
+        except Exception as e:
+            log.warning(f"Erro ao ler {caminho}: {e}")
+    return padrao
+
+
+def salvar_json(caminho: Path, dados):
+    caminho.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+# ── Controle de consumo Apify ─────────────────────────────────────────────────
+
+def registrar_consumo(query: str, resultados: int, creditos: int = 0, erro: str = ""):
+    dados = ler_json(CONSUMO_APIFY, {"registros": []})
+    dados["registros"].append({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "query": query,
+        "resultados": resultados,
+        "creditos_consumidos": creditos,
+        "erro": erro,
+    })
+    salvar_json(CONSUMO_APIFY, dados)
+
+
+def resumo_consumo():
+    dados = ler_json(CONSUMO_APIFY, {"registros": []})
+    registros = dados.get("registros", [])
+    total = sum(r.get("creditos_consumidos", 0) for r in registros)
+    hoje_str = datetime.now().strftime("%Y-%m-%d")
+    hoje_count = sum(1 for r in registros if r.get("timestamp", "").startswith(hoje_str))
+    log.info(f"Consumo Apify — chamadas hoje: {hoje_count} | créditos acumulados: {total}")
+
+
+# ── Histórico de notícias ─────────────────────────────────────────────────────
+
+def ja_publicado(url: str, tema_slug: str, dias: int = 15) -> bool:
+    dados = ler_json(HISTORICO, {"noticias": []})
+    limite = datetime.now(timezone.utc) - timedelta(days=dias)
+
+    for item in dados.get("noticias", []):
+        ts = item.get("data_publicacao", "")
+        try:
+            data = datetime.fromisoformat(ts)
+            if data.tzinfo is None:
+                data = data.replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+
+        if data < limite:
+            continue
+
+        if item.get("url_fonte") == url:
+            return True
+        if item.get("tema_slug") == tema_slug:
+            return True
+
+    return False
+
+
+def registrar_noticia_publicada(noticia: dict):
+    dados = ler_json(HISTORICO, {"noticias": []})
+    dados["noticias"].append({
+        "data_publicacao": datetime.now(timezone.utc).isoformat(),
+        "titulo_noticia": noticia.get("titulo", ""),
+        "url_fonte": noticia.get("url", ""),
+        "tema_slug": noticia.get("tema_slug", ""),
+    })
+    dados["noticias"] = dados["noticias"][-90:]
+    salvar_json(HISTORICO, dados)
+
+
+# ── Apify — Google News Scraper ───────────────────────────────────────────────
+
+def buscar_apify(query: str, max_resultados: int = 8) -> List[Dict]:
+    config_blog = ler_json(CONFIG_BLOG, {})
+    apify_ator = config_blog.get("apify_ator", "")
+
+    if not APIFY_TOKEN or not apify_ator:
+        if not APIFY_TOKEN:
+            log.info("[Apify] APIFY_TOKEN não configurado. Usando RSS.")
+        else:
+            log.info("[Apify] apify_ator não configurado em config/blog.json. Usando RSS.")
+        return []
+
+    log.info(f"[Apify] Buscando: '{query}' via {apify_ator}")
+    try:
+        client = ApifyClient(APIFY_TOKEN)
+        run_input = {
+            "queries": query,
+            "maxItemsPerQuery": max_resultados,
+            "language": "pt-BR",
+            "country": "BR",
+            "timeRange": "1d",
+        }
+
+        run = client.actor(apify_ator).call(run_input=run_input)
+        items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
+
+        log.info(f"[Apify] {len(items)} resultado(s) para '{query}'")
+        registrar_consumo(query, len(items))
+        return items
+
+    except Exception as e:
+        msg = str(e)
+        if "402" in msg or "payment" in msg.lower() or "credit" in msg.lower():
+            log.warning("[Apify] Limite de créditos atingido. Ativando fallback RSS.")
+            registrar_consumo(query, 0, 0, erro="limite_atingido")
+        elif "401" in msg or "unauthorized" in msg.lower():
+            log.warning("[Apify] Token inválido ou expirado.")
+            registrar_consumo(query, 0, 0, erro="token_invalido")
+        else:
+            msg_segura = msg.replace(APIFY_TOKEN, "***") if APIFY_TOKEN else msg
+            log.error(f"[Apify] Erro: {msg_segura}")
+            registrar_consumo(query, 0, 0, erro=msg_segura)
+        return []
+
+
+def normalizar_apify(item: Dict, tema: Dict) -> Dict:
+    return {
+        "titulo": item.get("title", ""),
+        "url": item.get("url", item.get("link", "")),
+        "fonte": item.get("publisher", {}).get("title", "") if isinstance(item.get("publisher"), dict) else item.get("publisher", ""),
+        "data": item.get("publishedAt", item.get("date", "")),
+        "resumo": item.get("snippet", item.get("description", "")),
+        "tema_slug": tema["slug"],
+        "tema_nome": tema["nome"],
+        "origem": "apify",
+    }
+
+
+# ── RSS fallback ──────────────────────────────────────────────────────────────
+
+def buscar_rss(tema: Dict, fontes: List[Dict]) -> List[Dict]:
+    palavras = set()
+    for frase in tema.get("palavras_chave", []):
+        for palavra in frase.lower().split():
+            if len(palavra) >= 4:
+                palavras.add(palavra)
+
+    limite = datetime.now(timezone.utc) - timedelta(hours=48)
+    resultados = []
+
+    for fonte in fontes:
+        log.info(f"[RSS] Lendo {fonte['nome']}...")
+        try:
+            feed = feedparser.parse(fonte["url"])
+            for entry in feed.entries:
+                texto = (
+                    (entry.get("title") or "") + " " +
+                    (entry.get("summary") or "")
+                ).lower()
+
+                if not any(p in texto for p in palavras):
+                    continue
+
+                data_entry = None
+                if hasattr(entry, "published_parsed") and entry.published_parsed:
+                    import time
+                    ts = time.mktime(entry.published_parsed)
+                    data_entry = datetime.fromtimestamp(ts, tz=timezone.utc)
+
+                if data_entry and data_entry < limite:
+                    continue
+
+                resultados.append({
+                    "titulo": entry.get("title", ""),
+                    "url": entry.get("link", ""),
+                    "fonte": fonte["nome"],
+                    "data": data_entry.isoformat() if data_entry else "",
+                    "resumo": entry.get("summary", "")[:300],
+                    "tema_slug": tema["slug"],
+                    "tema_nome": tema["nome"],
+                    "origem": "rss",
+                })
+
+        except Exception as e:
+            log.warning(f"[RSS] Erro em {fonte['nome']}: {e}")
+
+    log.info(f"[RSS] {len(resultados)} resultado(s) para tema '{tema['nome']}'")
+    return resultados
+
+
+# ── Pontuação de relevância ───────────────────────────────────────────────────
+
+FONTES_AUTORIDADE = {
+    "valor.globo.com": 10,
+    "infomoney.com.br": 8,
+    "finsiders.com.br": 9,
+    "neofeed.com.br": 8,
+    "exame.com": 7,
+    "startupi.com.br": 6,
+}
+
+PALAVRAS_JURIDICAS = [
+    "banco central", "bacen", "bcb", "cvm", "susep", "coaf",
+    "resolução", "normativo", "regulação", "instrução normativa",
+    "open finance", "pix", "arranjo pagamento", "instituição pagamento",
+    "compliance", "pld", "kyc", "lavagem dinheiro",
+    "scd", "sep", "fintech", "insurtech",
+    "ipo", "venture capital", "rodada", "aquisição",
+]
+
+
+def pontuar_noticia(noticia: dict) -> float:
+    texto = (noticia.get("titulo", "") + " " + noticia.get("resumo", "")).lower()
+    pontos = 0.0
+
+    for dominio, score in FONTES_AUTORIDADE.items():
+        if dominio in noticia.get("url", "").lower() or dominio in noticia.get("fonte", "").lower():
+            pontos += score
+            break
+
+    for palavra in PALAVRAS_JURIDICAS:
+        if palavra in texto:
+            pontos += 2
+
+    data_str = noticia.get("data", "")
+    if data_str:
+        try:
+            data = datetime.fromisoformat(data_str)
+            if data.tzinfo is None:
+                data = data.replace(tzinfo=timezone.utc)
+            horas_atras = (datetime.now(timezone.utc) - data).total_seconds() / 3600
+            if horas_atras < 6:
+                pontos += 8
+            elif horas_atras < 24:
+                pontos += 4
+        except Exception:
+            pass
+
+    if not noticia.get("resumo"):
+        pontos -= 3
+
+    return pontos
+
+
+# ── Seleção da notícia mais relevante ────────────────────────────────────────
+
+def selecionar_melhor(candidatos: List[Dict]) -> Optional[Dict]:
+    validos = [
+        c for c in candidatos
+        if c.get("url") and not ja_publicado(c["url"], c.get("tema_slug", ""))
+    ]
+
+    if not validos:
+        return None
+
+    validos.sort(key=pontuar_noticia, reverse=True)
+    escolhida = validos[0]
+    log.info(f"Notícia selecionada: [{escolhida['tema_nome']}] {escolhida['titulo']}")
+    return escolhida
+
+
+# ── Evergreen fallback ────────────────────────────────────────────────────────
+
+TEMAS_EVERGREEN = [
+    {
+        "tipo": "evergreen",
+        "tema_slug": "regulacao-bacen",
+        "tema_nome": "Regulação do Banco Central para fintechs",
+        "titulo": "Como obter licença do Banco Central para operar como fintech no Brasil",
+        "resumo": "Guia completo sobre as categorias de autorização do BCB: IP, SCD, SEP e banco digital — requisitos, capital mínimo e processo regulatório.",
+        "url": "",
+        "fonte": "evergreen",
+        "data": "",
+        "origem": "evergreen",
+    },
+    {
+        "tipo": "evergreen",
+        "tema_slug": "open-finance",
+        "tema_nome": "Open Finance e dados financeiros",
+        "titulo": "Open Finance no Brasil: o que mudou para fintechs e consumidores",
+        "resumo": "Análise completa do Open Finance brasileiro, compartilhamento de dados e oportunidades regulatórias para fintechs e iniciadores de pagamento.",
+        "url": "",
+        "fonte": "evergreen",
+        "data": "",
+        "origem": "evergreen",
+    },
+    {
+        "tipo": "evergreen",
+        "tema_slug": "compliance-pld",
+        "tema_nome": "Compliance e PLD em fintechs",
+        "titulo": "PLD e KYC em fintechs: obrigações legais e boas práticas",
+        "resumo": "O que fintechs precisam implementar em prevenção à lavagem de dinheiro, identificação de clientes e reporte ao COAF.",
+        "url": "",
+        "fonte": "evergreen",
+        "data": "",
+        "origem": "evergreen",
+    },
+    {
+        "tipo": "evergreen",
+        "tema_slug": "pix-pagamentos",
+        "tema_nome": "PIX e meios de pagamento",
+        "titulo": "PIX automático e arranjos de pagamento: o que fintechs precisam saber",
+        "resumo": "Regras do PIX automático, participação em arranjos de pagamento e obrigações regulatórias para fintechs de meios de pagamento.",
+        "url": "",
+        "fonte": "evergreen",
+        "data": "",
+        "origem": "evergreen",
+    },
+]
+
+
+def escolher_evergreen(temas_slugs_usados: List[str]) -> Dict:
+    for tema in TEMAS_EVERGREEN:
+        if tema["tema_slug"] not in temas_slugs_usados:
+            return tema
+    return TEMAS_EVERGREEN[0]
+
+
+# ── Orquestrador principal ────────────────────────────────────────────────────
+
+def main(forcar_rss: bool = False, apenas_tema: str = "") -> Dict:
+    log.info("=" * 60)
+    log.info("BUSCAR NOTÍCIA — início")
+    resumo_consumo()
+
+    config_temas  = ler_json(CONFIG_TEMAS, {"temas": []})
+    config_fontes = ler_json(CONFIG_FONTES, {"rss_feeds": []})
+
+    temas = config_temas.get("temas", [])
+    fontes_rss = config_fontes.get("rss_feeds", [])
+
+    if apenas_tema:
+        temas = [t for t in temas if t["slug"] == apenas_tema]
+        if not temas:
+            log.error(f"Tema '{apenas_tema}' não encontrado em config/temas.json")
+            sys.exit(1)
+
+    todos_candidatos = []
+    apify_falhou = forcar_rss
+
+    # ── Etapa 1: Apify ──
+    if not apify_falhou:
+        for tema in temas:
+            for query in tema["palavras_chave"][:2]:
+                items = buscar_apify(query, max_resultados=5)
+                if items is None or (not items and not APIFY_TOKEN):
+                    apify_falhou = True
+                    break
+                for item in items:
+                    todos_candidatos.append(normalizar_apify(item, tema))
+            if apify_falhou:
+                break
+
+    # ── Etapa 2: RSS fallback ──
+    if apify_falhou or not todos_candidatos:
+        log.info("Ativando fallback RSS...")
+        for tema in temas:
+            resultados_rss = buscar_rss(tema, fontes_rss)
+            todos_candidatos.extend(resultados_rss)
+
+    # ── Etapa 3: Seleção ──
+    noticia = selecionar_melhor(todos_candidatos)
+
+    # ── Etapa 4: Evergreen ──
+    if not noticia:
+        log.warning("Nenhuma notícia nova encontrada. Usando tema evergreen.")
+        slugs_usados = [t["slug"] for t in temas]
+        noticia = escolher_evergreen(slugs_usados)
+
+    log.info("=" * 60)
+    log.info(f"RESULTADO FINAL:")
+    log.info(f"  Tema:   {noticia.get('tema_nome')}")
+    log.info(f"  Título: {noticia.get('titulo')}")
+    log.info(f"  Fonte:  {noticia.get('fonte')} ({noticia.get('origem')})")
+    log.info(f"  URL:    {noticia.get('url') or '(sem URL — evergreen)'}")
+    log.info("=" * 60)
+
+    resultado_path = BASE / "dados" / "noticia_selecionada.json"
+    salvar_json(resultado_path, noticia)
+    log.info(f"Resultado salvo em {resultado_path}")
+
+    print(json.dumps(noticia, ensure_ascii=False, indent=2))
+
+    return noticia
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Busca notícia para o artigo diário")
+    parser.add_argument("--forcar-rss", action="store_true", help="Pular Apify e usar só RSS")
+    parser.add_argument("--tema", default="", help="Slug do tema específico (ex: regulacao-bacen)")
+    args = parser.parse_args()
+
+    main(forcar_rss=args.forcar_rss, apenas_tema=args.tema)
