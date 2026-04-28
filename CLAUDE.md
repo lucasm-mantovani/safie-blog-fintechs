@@ -74,20 +74,11 @@ Blog-fintechs/
 Este projeto é uma réplica adaptada de ~/CLAUDE/Blog-Cripto.
 Ver ~/CLAUDE/Blog-Cripto/REPLICAR.md para o processo completo de infraestrutura.
 
-## Estado atual do projeto (2026-04-23)
-- **Fase 1 concluída:** Estrutura de pastas, configs, scripts, templates, páginas HTML
-- **Fase 2:** Interface HTML/CSS — usar mesmo estilo do Blog-Cripto (identidade SAFIE compartilhada)
-- **Fase 3:** Testar pipeline RSS
-- **Fase 4:** Testar geração e publicação do 1º artigo
-- **Fase 5:** GitHub + Cloudflare Pages + cron job (launchd 7h45) + DNS
-- **Fase 6:** Validação SEO e documentação final
-
-## Próximos passos
-1. Criar .env com ANTHROPIC_API_KEY e GITHUB_TOKEN
-2. git init + criar repositório safie-blog-fintechs no GitHub
-3. Testar: `python3 scripts/buscar_noticia.py --forcar-rss`
-4. Testar: `python3 scripts/gerar_artigo.py`
-5. Testar: `python3 scripts/publicar.py --sem-git`
-6. Conectar Cloudflare Pages ao repositório
-7. Configurar launchd (cron 7h45)
-8. DNS: CNAME fintechs → safie-blog-fintechs.pages.dev no Registro.br
+## Estado atual do projeto (2026-04-28)
+- **Fases 1–5 concluídas:** pipeline 4 etapas ativo, launchd às 7h45, domínio fintechs.safie.blog.br no ar
+- **Fase 6 concluída (2026-04-28):**
+  - DNS propagado e HTTP 200 confirmados
+  - robots.txt + sitemap.xml funcionando
+  - Schema.org BlogPosting + FAQPage em todos os artigos
+  - meta robots, keywords, og:*, twitter:* no template
+  - Validação manual opcional: Google Rich Results Test + PageSpeed Insights
