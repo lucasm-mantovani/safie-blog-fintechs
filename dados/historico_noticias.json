@@ -1,1 +1,10 @@
-{"noticias":[]}
+{
+  "noticias": [
+    {
+      "data_publicacao": "2026-05-06T10:45:47.769852+00:00",
+      "titulo_noticia": "Grupo Pão de Açúcar alcança acordo com credores para reduzir dívida de R$ 4,57 bi",
+      "url_fonte": "https://www.infomoney.com.br/mercados/grupo-pao-de-acucar-alcanca-acordo-com-credores-para-reduzir-divida-de-r457-bi/",
+      "tema_slug": "regulacao-bacen"
+    }
+  ]
+}
