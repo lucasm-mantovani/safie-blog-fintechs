@@ -203,6 +203,150 @@
       "titulo_noticia": "Flamengo e Palmeiras fazem neste sábado “maior clássico econômico” do continente",
       "url_fonte": "https://www.infomoney.com.br/esportes/flamengo-e-palmeiras-fazem-neste-sabado-maior-classico-economico-do-continente/",
       "tema_slug": "insurtech"
+    },
+    {
+      "data_publicacao": "2026-05-24T03:26:24.473130+00:00",
+      "titulo_noticia": "Pix, iDEAL, BLIK: quando o “alternativo” vira padrão",
+      "url_fonte": "https://startupi.com.br/pix-ideal-blik-quando-o-alternativo-vira-padrao/",
+      "tema_slug": "regulacao-bacen"
+    },
+    {
+      "data_publicacao": "2026-05-24T03:57:01.547730+00:00",
+      "titulo_noticia": "Na reta final, 30% ainda não enviaram declaração do Imposto de Renda",
+      "url_fonte": "https://www.infomoney.com.br/minhas-financas/na-reta-final-30-ainda-nao-enviaram-declaracao-do-imposto-de-renda/",
+      "tema_slug": "tributacao-fintech"
+    },
+    {
+      "data_publicacao": "2026-05-24T04:27:39.682893+00:00",
+      "titulo_noticia": "Uber faz oferta pela Delivery Hero, da Alemanha",
+      "url_fonte": "https://www.infomoney.com.br/business/uber-faz-oferta-pela-delivery-hero-da-alemanha/",
+      "tema_slug": "investimento-fintech"
+    },
+    {
+      "data_publicacao": "2026-05-24T10:46:01.249677+00:00",
+      "titulo_noticia": "Após Banco Master, próximo escândalo será com os fundos de investimento, diz Mercadante",
+      "url_fonte": "https://neofeed.com.br/negocios/apos-banco-master-proximo-escandalo-sera-com-os-fundos-de-investimento-diz-mercadante/",
+      "tema_slug": "pix-pagamentos"
+    },
+    {
+      "data_publicacao": "2026-05-25T03:32:52.998412+00:00",
+      "titulo_noticia": "Calendário econômico da semana: PIB, trabalho e inflação são foco no Brasil",
+      "url_fonte": "https://www.infomoney.com.br/mercados/calendario-economico-da-semana-pib-trabalho-e-inflacao-sao-foco-no-brasil/",
+      "tema_slug": "credito-digital"
+    },
+    {
+      "data_publicacao": "2026-05-25T11:14:58.218952+00:00",
+      "titulo_noticia": "Entre filas digitais e gasolina a US$ 12: o novo mercado de combustíveis em Cuba",
+      "url_fonte": "https://neofeed.com.br/finde/entre-filas-digitais-e-gasolina-a-us-12-o-novo-mercado-de-combustiveis-em-cuba/",
+      "tema_slug": "compliance-pld"
+    },
+    {
+      "data_publicacao": "2026-05-26T03:25:54.130567+00:00",
+      "titulo_noticia": "Terremoto de magnitude 6,9 atinge o Chile e é sentido no Brasil",
+      "url_fonte": "https://www.infomoney.com.br/mundo/terremoto-de-magnitude-69-atinge-o-chile-e-e-sentido-no-brasil/",
+      "tema_slug": "open-finance"
+    },
+    {
+      "data_publicacao": "2026-05-26T10:46:20.993445+00:00",
+      "titulo_noticia": "SLCE3: Guerra e fertilizantes ameaçam custo da safra brasileira, diz CEO da SLC",
+      "url_fonte": "https://www.infomoney.com.br/mercados/guerra-e-fertilizantes-ameacam-custo-da-safra-brasileira-diz-ceo-da-slc/",
+      "tema_slug": "insurtech"
+    },
+    {
+      "data_publicacao": "2026-05-27T03:56:17.852472+00:00",
+      "titulo_noticia": "STF é a luz no fim do túnel para o BRB (mas risco de liquidação ainda paira no ar)",
+      "url_fonte": "https://neofeed.com.br/poder/stf-e-a-luz-no-fim-do-tunel-para-o-brb-mas-risco-de-liquidacao-ainda-paira-no-ar/",
+      "tema_slug": "regulacao-bacen"
+    },
+    {
+      "data_publicacao": "2026-05-27T04:26:57.212905+00:00",
+      "titulo_noticia": "Divergências no governo causam mais indefinição sobre “imposto do pecado”",
+      "url_fonte": "https://neofeed.com.br/poder/divergencias-no-governo-causam-mais-indefinicao-sobre-imposto-do-pecado/",
+      "tema_slug": "tributacao-fintech"
+    },
+    {
+      "data_publicacao": "2026-05-27T04:57:35.516460+00:00",
+      "titulo_noticia": "Ministério Público do Rio defende falência da Refit",
+      "url_fonte": "https://www.infomoney.com.br/brasil/ministerio-publico-do-rio-defende-falencia-da-refit/",
+      "tema_slug": "investimento-fintech"
+    },
+    {
+      "data_publicacao": "2026-05-27T11:06:36.161699+00:00",
+      "titulo_noticia": "Inflação global muda o jogo e acende alerta para o crédito no Brasil",
+      "url_fonte": "https://www.infomoney.com.br/onde-investir/inflacao-global-muda-o-jogo-e-acende-alerta-para-o-credito-no-brasil/",
+      "tema_slug": "pix-pagamentos"
+    },
+    {
+      "data_publicacao": "2026-05-28T03:44:54.615476+00:00",
+      "titulo_noticia": "Justiça suspende projeto da ‘Times Square Paulistana’ e proíbe início das obras",
+      "url_fonte": "https://www.infomoney.com.br/brasil/justica-suspende-projeto-da-times-square-paulistana-e-proibe-inicio-das-obras/",
+      "tema_slug": "credito-digital"
+    },
+    {
+      "data_publicacao": "2026-05-28T11:25:05.486313+00:00",
+      "titulo_noticia": "Listo, fintech do setor automotivo, sofre ataque hacker via Pix",
+      "url_fonte": "https://finsidersbrasil.com.br/noticias-sobre-fintechs/fintech-listo-sofre-ataque-hacker-via-pix/",
+      "tema_slug": "compliance-pld"
+    },
+    {
+      "data_publicacao": "2026-05-29T03:54:11.570047+00:00",
+      "titulo_noticia": "Anthropic supera OpenAI e se torna a startup de IA mais valiosa do mundo",
+      "url_fonte": "https://neofeed.com.br/negocios/anthropic-supera-openai-e-se-torna-a-startup-de-ia-mais-valiosa-do-mundo/",
+      "tema_slug": "open-finance"
+    },
+    {
+      "data_publicacao": "2026-05-29T11:06:49.211128+00:00",
+      "titulo_noticia": "Santander Brasil (SANB11) propõe incorporar sua controlada Esfera Fidelidade",
+      "url_fonte": "https://www.infomoney.com.br/mercados/santander-brasil-sanb11-propoe-incorporar-sua-controlada-esfera-fidelidade/",
+      "tema_slug": "insurtech"
+    },
+    {
+      "data_publicacao": "2026-05-30T04:01:22.471735+00:00",
+      "titulo_noticia": "Fintech brasileira leva Pix à era da inteligência artificial",
+      "url_fonte": "https://neofeed.com.br/startups/fintech-brasileira-leva-pix-a-era-da-inteligencia-artificial/",
+      "tema_slug": "regulacao-bacen"
+    },
+    {
+      "data_publicacao": "2026-05-30T04:32:03.472631+00:00",
+      "titulo_noticia": "Receita tem recorde de restituições no fim do prazo de entrega do IR",
+      "url_fonte": "https://www.infomoney.com.br/minhas-financas/receita-tem-recorde-de-restituicoes-no-fim-do-prazo-de-entrega-do-ir/",
+      "tema_slug": "tributacao-fintech"
+    },
+    {
+      "data_publicacao": "2026-05-30T05:02:47.645495+00:00",
+      "titulo_noticia": "CVM derruba obrigatoriedade de divulgação de informações sobre sustentabilidade",
+      "url_fonte": "https://www.infomoney.com.br/brasil/cvm-derruba-obrigatoriedade-de-divulgacao-de-informacoes-sobre-sustentabilidade/",
+      "tema_slug": "investimento-fintech"
+    },
+    {
+      "data_publicacao": "2026-05-30T11:12:34.489527+00:00",
+      "titulo_noticia": "É possível tirar herança da família? Entenda se atitude em novela da Globo é legal",
+      "url_fonte": "https://www.infomoney.com.br/minhas-financas/arthur-brandao-novela-pode-tirar-heranca-familia/",
+      "tema_slug": "pix-pagamentos"
+    },
+    {
+      "data_publicacao": "2026-05-31T04:06:28.315691+00:00",
+      "titulo_noticia": "PF abre inquérito para apurar ações gravadas para programa de TV em aeroportos de SP",
+      "url_fonte": "https://www.infomoney.com.br/brasil/pf-abre-inquerito-para-apurar-acoes-gravadas-para-programa-de-tv-em-aeroportos-de-sp/",
+      "tema_slug": "credito-digital"
+    },
+    {
+      "data_publicacao": "2026-05-31T11:46:11.492970+00:00",
+      "titulo_noticia": "Fintech obtém liminar após veto do BC e caso expõe ‘labirinto jurídico’",
+      "url_fonte": "https://finsidersbrasil.com.br/regulamentacao/fintech-obtem-liminar-apos-veto-do-bc-e-caso-expoe-labirinto-juridico/",
+      "tema_slug": "compliance-pld"
+    },
+    {
+      "data_publicacao": "2026-06-01T04:06:09.262784+00:00",
+      "titulo_noticia": "Quando João Fonseca volta a jogar em Roland Garros?",
+      "url_fonte": "https://www.infomoney.com.br/esportes/quando-joao-fonseca-volta-a-jogar-em-roland-garros/",
+      "tema_slug": "open-finance"
+    },
+    {
+      "data_publicacao": "2026-06-01T11:14:06.689349+00:00",
+      "titulo_noticia": "Seguro mais caro ou barato? Quem mora com você pode pesar na conta",
+      "url_fonte": "https://www.infomoney.com.br/minhas-financas/seguro-mais-caro-ou-barato-quem-mora-com-voce-pode-pesar-na-conta/",
+      "tema_slug": "insurtech"
     }
   ]
 }
