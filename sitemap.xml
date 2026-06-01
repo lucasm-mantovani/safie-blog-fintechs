@@ -69,6 +69,12 @@
 
   <!-- Artigos adicionados automaticamente pelo publicar.py -->
   <url>
+    <loc>https://fintechs.safie.blog.br/artigos/2026-06-01-regulacao-do-banco-central-para-fintechs.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://fintechs.safie.blog.br/artigos/2026-06-01-insurtech-composicao-residencial-e-precificacao-de-seguros.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
