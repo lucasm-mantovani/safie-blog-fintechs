@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Crédito Digital e BNPL: Regulação e Riscos — SAFIE Fintechs</title>
+  <meta name="description" content="Entenda como o BNPL e o crédito digital se encaixam no marco regulatório brasileiro e quais os impactos práticos para fintechs e bancos digitais.">
+  <link rel="canonical" href="https://fintechs.safie.blog.br/artigos/2026-06-10-credito-digital-e-bnpl-regulacao-e-riscos-no-brasil.html">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="SAFIE">
+  <meta name="keywords" content="crédito, digital, bnpl, regulação, riscos">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Crédito Digital e BNPL: Regulação e Riscos — SAFIE Fintechs">
+  <meta property="og:description" content="Entenda como o BNPL e o crédito digital se encaixam no marco regulatório brasileiro e quais os impactos práticos para fintechs e bancos digitais.">
+  <meta property="og:url"         content="https://fintechs.safie.blog.br/artigos/2026-06-10-credito-digital-e-bnpl-regulacao-e-riscos-no-brasil.html">
+  <meta property="og:site_name"   content="SAFIE Fintechs">
+  <meta property="og:locale"      content="pt_BR">
+  <meta property="og:image"       content="https://fintechs.safie.blog.br/assets/img/artigos/2026-06-10-credito-digital-e-bnpl-regulacao-e-riscos-no-brasil.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-06-10T10:46:46Z">
+  <meta property="article:section"       content="Crédito digital e BNPL">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Crédito Digital e BNPL: Regulação e Riscos — SAFIE Fintechs">
+  <meta name="twitter:description" content="Entenda como o BNPL e o crédito digital se encaixam no marco regulatório brasileiro e quais os impactos práticos para fintechs e bancos digitais.">
+  <meta name="twitter:image"       content="https://fintechs.safie.blog.br/assets/img/artigos/2026-06-10-credito-digital-e-bnpl-regulacao-e-riscos-no-brasil.svg">
+
+  <!-- Schema.org JSON-LD (BlogPosting + FAQPage) -->
+  <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Crédito Digital e BNPL: Regulação e Riscos no Brasil",
+    "description": "Entenda como o BNPL e o crédito digital se encaixam no marco regulatório brasileiro e quais os impactos práticos para fintechs e bancos digitais.",
+    "datePublished": "2026-06-10T10:46:46Z",
+    "dateModified": "2026-06-10T10:46:46Z",
+    "author": {
+      "@type": "Organization",
+      "name": "SAFIE",
+      "url": "https://safie.com.br"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SAFIE Fintechs",
+      "url": "https://fintechs.safie.blog.br"
+    },
+    "url": "https://fintechs.safie.blog.br/artigos/2026-06-10-credito-digital-e-bnpl-regulacao-e-riscos-no-brasil.html",
+    "articleSection": "Crédito digital e BNPL",
+    "inLanguage": "pt-BR"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Uma fintech precisa de autorização do Banco Central para oferecer BNPL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende do modelo adotado. Se a fintech concede crédito com recursos próprios diretamente ao consumidor, sim: é necessária autorização como SCD ou outra modalidade equivalente. Se a fintech atua como correspondente de uma instituição autorizada, a autorização não é da fintech, mas o contrato de correspondência precisa estar formalizado conforme a Resolução BCB 96/2021."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O BNPL sem juros explícitos precisa informar o CET ao consumidor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. O Custo Efetivo Total deve ser informado em qualquer operação de crédito ao consumidor, mesmo que a taxa de juros nominal seja zero. O CDC (art. 52) e as normas do Banco Central exigem que eventuais encargos por atraso, multas e tarifas sejam apresentados de forma clara antes da contratação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como o BNPL deve ser contabilizado em uma SCD?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As operações BNPL concedidas por SCDs são classificadas como operações de crédito e estão sujeitas à Resolução CMN 4.966/2021, que adota o modelo de perda de crédito esperada (PCE). Isso significa que provisões devem ser constituídas desde a originação, com base em modelos de risco que estimem as perdas ao longo da vida do contrato."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A LGPD se aplica ao uso de dados para aprovação de crédito no BNPL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. O tratamento de dados pessoais para análise de risco de crédito é regulado pela LGPD (Lei 13.709/2018). O consumidor tem direito a ser informado sobre o uso de seus dados em decisões automatizadas e pode solicitar revisão de decisões tomadas exclusivamente por algoritmos, conforme o art. 20 da LGPD."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quais as principais penalidades para fintechs BNPL que descumprem regras do Banco Central?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O Banco Central pode aplicar advertência, multa de até R$ 2 bilhões (conforme a Lei 13.506/2017), suspensão de atividades e, nos casos mais graves, cassação da autorização de funcionamento. Para violações à LGPD, a ANPD pode aplicar multas de até 2% do faturamento, limitadas a R$ 50 milhões por infração."
+        }
+      }
+    ]
+  }
+]
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/estilo.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="SAFIE Fintechs — Página inicial">
+      <span class="logo-marca">SAFIE <span>Fintechs</span></span>
+      <span class="logo-sub">Direito &amp; Contabilidade</span>
+    </a>
+    <nav id="nav-principal" class="nav-principal" aria-label="Navegação principal">
+      <a href="/">Home</a>
+      <a href="/temas/">Temas</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/busca.html">Busca</a>
+    </nav>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <article class="artigo-wrapper" itemscope itemtype="https://schema.org/BlogPosting">
+
+    <header class="artigo-header">
+      <a class="artigo-tema" href="/temas/credito-digital.html">Crédito digital e BNPL</a>
+
+      <h1 class="artigo-titulo" itemprop="headline">Crédito Digital e BNPL: Regulação e Riscos</h1>
+
+      <div class="artigo-meta">
+        <span>Por <strong itemprop="author">SAFIE</strong></span>
+        <span>·</span>
+        <time datetime="2026-06-10T10:46:46Z" itemprop="datePublished">10 de junho de 2026</time>
+        <span>·</span>
+        <span>4 min de leitura</span>
+      </div>
+    </header>
+
+    <img class="artigo-capa" src="/assets/img/artigos/2026-06-10-credito-digital-e-bnpl-regulacao-e-riscos-no-brasil.svg" alt="Crédito Digital e BNPL: Regulação e Riscos" width="1200" height="630" loading="lazy">
+
+    <!-- Resumo executivo (para IAs generativas / GEO) -->
+    <aside class="resumo-executivo" itemprop="abstract">
+      <strong>Resumo executivo</strong>
+      O modelo Buy Now, Pay Later (BNPL) cresce no Brasil, mas opera em zona de atenção regulatória crescente do Banco Central e do BACEN. Fintechs que oferecem crédito parcelado sem cobrar juros explícitos precisam compreender a aplicação do CDC, da Resolução CMN 4.966/2021 e das normas de crédito ao consumidor. A ausência de uma lei específica para BNPL não significa ausência de obrigações: as regras gerais de crédito, transparência e gestão de risco já se aplicam.
+    </aside>
+
+    <!-- Corpo do artigo -->
+    <div class="artigo-corpo" itemprop="articleBody">
+      <p>O crédito digital avançou de forma acelerada no Brasil nos últimos anos. Modalidades como o BNPL (Buy Now, Pay Later), que permitem ao consumidor parcelar compras sem juros aparentes no ato da transação, ganharam espaço em plataformas de e-commerce, marketplaces e aplicativos de serviços. Estima-se que o volume de transações BNPL no país supere R$ 20 bilhões em 2026, segundo projeções de consultorias especializadas no setor.</p><p>Apesar do crescimento, o modelo ainda carece de regulamentação específica no Brasil. Isso gera uma percepção equivocada de que operar BNPL equivale a operar em um vácuo jurídico. Na prática, o arcabouço regulatório existente, composto pelo Código de Defesa do Consumidor (CDC), pelas normas do Banco Central e pela legislação de crédito, já alcança essas operações com força suficiente para gerar obrigações concretas.</p><p>Este artigo analisa o cenário jurídico e contábil do crédito digital e do BNPL no Brasil, com foco nos riscos regulatórios, nas obrigações de compliance e nos impactos práticos para fintechs, bancos digitais e demais participantes do sistema financeiro nacional.</p>
+
+<h2>Contexto jurídico e regulatório</h2>
+<h2>O BNPL é crédito: e isso tem consequências jurídicas</h2><p>A primeira questão regulatória relevante é classificar o BNPL corretamente. Quando uma fintech ou instituição financeira arca com o pagamento ao lojista e cobra do consumidor em parcelas futuras, ela está concedendo crédito. Isso independe de haver ou não cobrança de juros explícitos ao consumidor.</p><p>Essa classificação ativa a aplicação do CDC (Lei 8.078/1990), especialmente os artigos 52 e 54-B, que exigem informação clara sobre o custo total do crédito, o Custo Efetivo Total (CET) e os encargos em caso de atraso. A ausência dessas informações pode configurar prática abusiva e gerar sanções administrativas pela Senacon ou pelos Procons estaduais.</p><h2>Quem pode oferecer BNPL no Brasil?</h2><p>A oferta de crédito no Brasil é atividade privativa de instituições autorizadas pelo Banco Central, nos termos da Lei 4.595/1964 e da Resolução BCB 80/2021. Fintechs que não possuem autorização como Sociedade de Crédito Direto (SCD), Sociedade de Empréstimo entre Pessoas (SEP) ou outra modalidade equivalente não podem conceder crédito com recursos próprios de forma direta ao consumidor final.</p><p>Muitas operações BNPL no Brasil são estruturadas por meio de parcerias com SCDs ou bancos parceiros, o que é permitido, mas exige cuidado na formalização dos contratos de correspondência bancária e na divisão de responsabilidades regulatórias. O Banco Central já sinalizou, em comunicados publicados entre 2023 e 2025, que monitora modelos nos quais o risco de crédito é transferido de forma pouco transparente entre parceiros.</p><h2>Contabilização e provisão de perdas esperadas</h2><p>Do ponto de vista contábil, as operações BNPL devem observar a Resolução CMN 4.966/2021, que implementou o modelo de perda de crédito esperada (PCE) alinhado ao IFRS 9 para instituições financeiras autorizadas pelo Banco Central. Isso significa que o risco de inadimplência precisa ser reconhecido desde a originação da operação, e não apenas quando o atraso se materializa.</p><p>Para fintechs que atuam como correspondentes ou que consolidam carteiras de crédito em balanço, o impacto pode ser relevante: provisões maiores no início do ciclo de crédito reduzem o resultado contábil de curto prazo e exigem capital adequado para suportar a expansão da carteira. Ignorar esse mecanismo pode levar a descasamentos patrimoniais que o Banco Central considera como risco sistêmico em fase de expansão acelerada.</p><h2>Proteção de dados e scoring de crédito</h2><p>A concessão de crédito digital envolve, quase sempre, tratamento de dados pessoais sensíveis para fins de análise de risco. A Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018) exige que o titular seja informado sobre o uso de seus dados em decisões automatizadas, incluindo scoring de crédito, e que a fintech apresente a lógica do processo quando solicitado. O descumprimento pode gerar sanções da ANPD de até 2% do faturamento, limitadas a R$ 50 milhões por infração.</p>
+
+<h2>Impacto prático</h2>
+<p>Para fintechs que já operam ou pretendem lançar produtos BNPL, o primeiro passo é mapear com precisão o modelo jurídico adotado: a empresa concede crédito diretamente ou atua como intermediária? Essa distinção define quais autorizações são necessárias, qual o regime contábil aplicável e quais obrigações de transparência precisam ser cumpridas perante o consumidor.</p><p>Fintechs que operam sem autorização do Banco Central e que terceirizam a concessão de crédito para uma SCD parceira precisam formalizar essa relação por meio de contrato de correspondência bancária registrado e de acordo com a Resolução BCB 96/2021. A ausência desse contrato, ou contratos mal estruturados, é uma das principais causas de autuações e exigências de adequação identificadas nas inspeções do Banco Central em 2024 e 2025.</p><p>Além disso, a gestão de inadimplência no BNPL exige processos robustos de cobrança que respeitem o Código de Defesa do Consumidor e a Resolução CMN 4.993/2022, que trata de conduta responsável na concessão de crédito. Práticas de cobrança abusiva, mesmo que terceirizadas, geram responsabilidade solidária para a instituição originadora do crédito.</p>
+
+<h2>Considerações finais</h2>
+<p>O crédito digital e o BNPL representam oportunidades reais de inclusão financeira e de geração de receita para fintechs brasileiras. Mas operar esses modelos com segurança exige mais do que tecnologia e escala: exige estrutura jurídica sólida, contabilidade alinhada às normas vigentes e cultura de compliance integrada ao produto desde a concepção.</p><p>O Banco Central e os demais reguladores brasileiros não demonstraram intenção de bloquear o avanço do crédito digital, mas deixaram claro que a expansão precisa ocorrer dentro do perímetro regulatório existente. Fintechs que anteciparem essas exigências constroem vantagem competitiva sustentável; as que ignorarem correm o risco de interrupção operacional em um momento de crescimento.</p>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+      <h2>Perguntas frequentes</h2>
+      <div class="faq-item" itemscope itemtype="https://schema.org/Question">
+  <p class="faq-pergunta" itemprop="name">Uma fintech precisa de autorização do Banco Central para oferecer BNPL?</p>
+  <div class="faq-resposta" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Depende do modelo adotado. Se a fintech concede crédito com recursos próprios diretamente ao consumidor, sim: é necessária autorização como SCD ou outra modalidade equivalente. Se a fintech atua como correspondente de uma instituição autorizada, a autorização não é da fintech, mas o contrato de correspondência precisa estar formalizado conforme a Resolução BCB 96/2021.</span></div>
+</div>
+<div class="faq-item" itemscope itemtype="https://schema.org/Question">
+  <p class="faq-pergunta" itemprop="name">O BNPL sem juros explícitos precisa informar o CET ao consumidor?</p>
+  <div class="faq-resposta" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Sim. O Custo Efetivo Total deve ser informado em qualquer operação de crédito ao consumidor, mesmo que a taxa de juros nominal seja zero. O CDC (art. 52) e as normas do Banco Central exigem que eventuais encargos por atraso, multas e tarifas sejam apresentados de forma clara antes da contratação.</span></div>
+</div>
+<div class="faq-item" itemscope itemtype="https://schema.org/Question">
+  <p class="faq-pergunta" itemprop="name">Como o BNPL deve ser contabilizado em uma SCD?</p>
+  <div class="faq-resposta" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">As operações BNPL concedidas por SCDs são classificadas como operações de crédito e estão sujeitas à Resolução CMN 4.966/2021, que adota o modelo de perda de crédito esperada (PCE). Isso significa que provisões devem ser constituídas desde a originação, com base em modelos de risco que estimem as perdas ao longo da vida do contrato.</span></div>
+</div>
+<div class="faq-item" itemscope itemtype="https://schema.org/Question">
+  <p class="faq-pergunta" itemprop="name">A LGPD se aplica ao uso de dados para aprovação de crédito no BNPL?</p>
+  <div class="faq-resposta" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Sim. O tratamento de dados pessoais para análise de risco de crédito é regulado pela LGPD (Lei 13.709/2018). O consumidor tem direito a ser informado sobre o uso de seus dados em decisões automatizadas e pode solicitar revisão de decisões tomadas exclusivamente por algoritmos, conforme o art. 20 da LGPD.</span></div>
+</div>
+<div class="faq-item" itemscope itemtype="https://schema.org/Question">
+  <p class="faq-pergunta" itemprop="name">Quais as principais penalidades para fintechs BNPL que descumprem regras do Banco Central?</p>
+  <div class="faq-resposta" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">O Banco Central pode aplicar advertência, multa de até R$ 2 bilhões (conforme a Lei 13.506/2017), suspensão de atividades e, nos casos mais graves, cassação da autorização de funcionamento. Para violações à LGPD, a ANPD pode aplicar multas de até 2% do faturamento, limitadas a R$ 50 milhões por infração.</span></div>
+</div>
+
+    </section>
+
+    <!-- Referências -->
+    <aside class="referencias">
+      <h2>Fontes e referências</h2>
+      <ul>
+<li><a href="https://www.infomoney.com.br/politica/quaest-47-concordam-com-lula-e-culpam-flavio-pela-possibilidade-de-tarifaco-dos-eua/" target="_blank" rel="noopener">InfoMoney</a></li>
+<li>Banco Central do Brasil: Resolução BCB 80/2021 (SCDs e SEPs) - https://www.bcb.gov.br</li>
+<li>Banco Central do Brasil: Resolução BCB 96/2021 (Correspondentes bancários) - https://www.bcb.gov.br</li>
+<li>Conselho Monetário Nacional: Resolução CMN 4.966/2021 (Perda de crédito esperada) - https://www.bcb.gov.br</li>
+<li>Conselho Monetário Nacional: Resolução CMN 4.993/2022 (Conduta responsável na concessão de crédito) - https://www.bcb.gov.br</li>
+<li>Lei 8.078/1990 (Código de Defesa do Consumidor) - https://www.planalto.gov.br</li>
+<li>Lei 4.595/1964 (Lei do Sistema Financeiro Nacional) - https://www.planalto.gov.br</li>
+<li>Lei 13.709/2018 (Lei Geral de Proteção de Dados) - https://www.planalto.gov.br</li>
+<li>Lei 13.506/2017 (Sanções administrativas do Banco Central) - https://www.planalto.gov.br</li>
+</ul>
+
+    </aside>
+
+  </article>
+
+
+  <!-- Sobre os autores -->
+  <div class="container">
+    <div class="sobre-autores">
+      <span class="sobre-autores-titulo">Sobre os autores</span>
+      <p>Conteúdo produzido pela SAFIE, consultoria jurídico-contábil para empresas digitais e de tecnologia. A SAFIE é liderada por <a href="https://instagram.com/lucasm.mantovani" target="_blank" rel="noopener"><strong>Lucas Mantovani</strong></a> e <a href="https://instagram.com/euitalocunha" target="_blank" rel="noopener"><strong>Italo Cunha</strong></a>.</p>
+    </div>
+  </div>
+
+  <!-- Artigos relacionados -->
+  <div class="container">
+    <section class="relacionados">
+      <h2>Artigos relacionados</h2>
+      <div class="relacionados-lista">
+        <p style="color:var(--cinza);font-size:0.9rem;">Mais artigos em breve.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">SAFIE <span>Fintechs</span></div>
+    <nav class="footer-links">
+      <a href="/">Home</a>
+      <a href="/temas/">Temas</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/busca.html">Busca</a>
+      <a href="https://safie.com.br" target="_blank" rel="noopener">safie.com.br</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </nav>
+    <p class="footer-copy">
+      © 2026 <a href="https://safie.com.br" target="_blank" rel="noopener">SAFIE</a> — As informações têm caráter educativo e não substituem assessoria jurídica individualizada.
+    </p>
+  </div>
+</footer>
+
+<script src="/assets/js/busca.js"></script>
+<script>
+fetch('https://safie-analytics.lucas-mantovani.workers.dev/track', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({ url: window.location.pathname, blog: 'fintechs' })
+}).catch(() => {});
+</script>
+</body>
+</html>
