@@ -71,10 +71,10 @@
 
   <!-- Título — linha 1 -->
   <text x="52" y="286" fill="#ffffff"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Bonificação em</text>
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Bonificação em ações:</text>
   <!-- Título — linha 2 -->
   <text x="52" y="352" fill="#3dd68c"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">ações: tributação em</text>
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">tributação em fintechs</text>
   <!-- Título — linha 3 (última linha fica na cor de destaque) -->
   <text x="52" y="418" fill="#3dd68c"
         font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700"></text>

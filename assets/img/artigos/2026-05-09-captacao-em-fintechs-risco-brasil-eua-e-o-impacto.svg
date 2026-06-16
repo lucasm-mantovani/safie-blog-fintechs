@@ -71,10 +71,10 @@
 
   <!-- Título — linha 1 -->
   <text x="52" y="286" fill="#ffffff"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Captação em Fintechs:</text>
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Captação em Fintechs: Risco</text>
   <!-- Título — linha 2 -->
   <text x="52" y="352" fill="#3dd68c"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Risco Brasil-EUA e o</text>
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Brasil-EUA e o Impacto</text>
   <!-- Título — linha 3 (última linha fica na cor de destaque) -->
   <text x="52" y="418" fill="#3dd68c"
         font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700"></text>

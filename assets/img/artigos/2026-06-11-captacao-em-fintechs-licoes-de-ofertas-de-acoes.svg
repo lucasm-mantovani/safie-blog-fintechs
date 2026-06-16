@@ -74,7 +74,7 @@
         font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Captação em fintechs:</text>
   <!-- Título — linha 2 -->
   <text x="52" y="352" fill="#3dd68c"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">lições de ofertas de</text>
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">lições de ofertas de ações</text>
   <!-- Título — linha 3 (última linha fica na cor de destaque) -->
   <text x="52" y="418" fill="#3dd68c"
         font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700"></text>

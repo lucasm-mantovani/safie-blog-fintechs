@@ -71,13 +71,13 @@
 
   <!-- Título — linha 1 -->
   <text x="52" y="286" fill="#ffffff"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Crédito Digital e</text>
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Crédito Digital</text>
   <!-- Título — linha 2 -->
-  <text x="52" y="352" fill="#3dd68c"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">BNPL: Risco de Lavagem</text>
+  <text x="52" y="352" fill="#ffffff"
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">e BNPL: Risco de</text>
   <!-- Título — linha 3 (última linha fica na cor de destaque) -->
   <text x="52" y="418" fill="#3dd68c"
-        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700"></text>
+        font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700">Lavagem de Dinheiro</text>
 
   <!-- Barra de destaque — canto inferior esquerdo -->
   <rect x="52" y="572" width="64" height="4" fill="#3dd68c"/>
