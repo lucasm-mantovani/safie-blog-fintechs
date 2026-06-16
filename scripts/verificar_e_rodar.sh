@@ -6,7 +6,7 @@
 #   1. Ainda não gerou artigo hoje
 #   2. Tem conexão com a internet
 
-PASTA="$HOME/CLAUDE/Blog-fintechs"
+PASTA="$HOME/CLAUDE/Blogs-SAFIE/Blog-fintechs"
 INDICE="$PASTA/artigos/indice.json"
 LOG="$PASTA/logs/watchdog_$(date +%Y-%m-%d).log"
 HOJE=$(date +%Y-%m-%d)
