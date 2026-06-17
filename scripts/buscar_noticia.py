@@ -6,7 +6,7 @@ Fluxo:
   2. Filtra resultados das últimas 48h
   3. Seleciona a notícia mais relevante (sem repetir histórico dos últimos 15 dias)
   4. Se Apify falhar (limite esgotado ou erro) → fallback para RSS
-  5. Se RSS também falhar → retorna tema evergreen para gerar artigo sem notícia
+  5. Se RSS também não trouxer notícia fresca → encerra com exit 75 (Direção 1: sem evergreen, não publica)
   6. Registra consumo em dados/consumo_apify.json
 
 Uso:
@@ -14,7 +14,7 @@ Uso:
   python3 scripts/buscar_noticia.py --forcar-rss   (pula Apify, usa só RSS)
   python3 scripts/buscar_noticia.py --tema regulacao-bacen  (busca apenas 1 tema)
 
-Saída: imprime JSON com a notícia selecionada (ou instrução evergreen)
+Saída: imprime JSON com a notícia selecionada; exit 75 se não houver notícia fresca
 """
 
 import json
@@ -328,69 +328,17 @@ def selecionar_melhor(candidatos: List[Dict]) -> Optional[Dict]:
     return escolhida
 
 
-# ── Evergreen fallback ────────────────────────────────────────────────────────
-
-TEMAS_EVERGREEN = [
-    {
-        "tipo": "evergreen",
-        "tema_slug": "regulacao-bacen",
-        "tema_nome": "Regulação do Banco Central para fintechs",
-        "titulo": "Como obter licença do Banco Central para operar como fintech no Brasil",
-        "resumo": "Guia completo sobre as categorias de autorização do BCB: IP, SCD, SEP e banco digital — requisitos, capital mínimo e processo regulatório.",
-        "url": "",
-        "fonte": "evergreen",
-        "data": "",
-        "origem": "evergreen",
-    },
-    {
-        "tipo": "evergreen",
-        "tema_slug": "open-finance",
-        "tema_nome": "Open Finance e dados financeiros",
-        "titulo": "Open Finance no Brasil: o que mudou para fintechs e consumidores",
-        "resumo": "Análise completa do Open Finance brasileiro, compartilhamento de dados e oportunidades regulatórias para fintechs e iniciadores de pagamento.",
-        "url": "",
-        "fonte": "evergreen",
-        "data": "",
-        "origem": "evergreen",
-    },
-    {
-        "tipo": "evergreen",
-        "tema_slug": "compliance-pld",
-        "tema_nome": "Compliance e PLD em fintechs",
-        "titulo": "PLD e KYC em fintechs: obrigações legais e boas práticas",
-        "resumo": "O que fintechs precisam implementar em prevenção à lavagem de dinheiro, identificação de clientes e reporte ao COAF.",
-        "url": "",
-        "fonte": "evergreen",
-        "data": "",
-        "origem": "evergreen",
-    },
-    {
-        "tipo": "evergreen",
-        "tema_slug": "pix-pagamentos",
-        "tema_nome": "PIX e meios de pagamento",
-        "titulo": "PIX automático e arranjos de pagamento: o que fintechs precisam saber",
-        "resumo": "Regras do PIX automático, participação em arranjos de pagamento e obrigações regulatórias para fintechs de meios de pagamento.",
-        "url": "",
-        "fonte": "evergreen",
-        "data": "",
-        "origem": "evergreen",
-    },
-]
-
-
-def escolher_evergreen(temas_slugs_usados: List[str]) -> Dict:
-    for tema in TEMAS_EVERGREEN:
-        if tema["tema_slug"] not in temas_slugs_usados:
-            return tema
-    return TEMAS_EVERGREEN[0]
-
-
 # ── Orquestrador principal ────────────────────────────────────────────────────
 
 def main(forcar_rss: bool = False, apenas_tema: str = "") -> Dict:
     log.info("=" * 60)
     log.info("BUSCAR NOTÍCIA — início")
     resumo_consumo()
+
+    # Higiene: limpar saída anterior para evitar consumo ambíguo (Direção 1)
+    arquivo_saida = BASE / "dados" / "noticia_selecionada.json"
+    if arquivo_saida.exists():
+        arquivo_saida.unlink()
 
     config_temas  = ler_json(CONFIG_TEMAS, {"temas": []})
     config_fontes = ler_json(CONFIG_FONTES, {"rss_feeds": []})
@@ -430,18 +378,17 @@ def main(forcar_rss: bool = False, apenas_tema: str = "") -> Dict:
     # ── Etapa 3: Seleção ──
     noticia = selecionar_melhor(todos_candidatos)
 
-    # ── Etapa 4: Evergreen ──
+    # ── Etapa 4: Sem notícia fresca → não publica hoje (Direção 1, sem evergreen) ──
     if not noticia:
-        log.warning("Nenhuma notícia nova encontrada. Usando tema evergreen.")
-        slugs_usados = [t["slug"] for t in temas]
-        noticia = escolher_evergreen(slugs_usados)
+        log.warning("Nenhuma notícia nova encontrada hoje. Encerrando sem publicar (exit 75).")
+        sys.exit(75)
 
     log.info("=" * 60)
     log.info(f"RESULTADO FINAL:")
     log.info(f"  Tema:   {noticia.get('tema_nome')}")
     log.info(f"  Título: {noticia.get('titulo')}")
     log.info(f"  Fonte:  {noticia.get('fonte')} ({noticia.get('origem')})")
-    log.info(f"  URL:    {noticia.get('url') or '(sem URL — evergreen)'}")
+    log.info(f"  URL:    {noticia.get('url') or '(sem URL)'}")
     log.info("=" * 60)
 
     resultado_path = BASE / "dados" / "noticia_selecionada.json"
