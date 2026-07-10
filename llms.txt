@@ -6,6 +6,7 @@
 
 ## Artigos
 
+- [Regulação do Banco Central para fintechs em 2026](https://fintechs.safie.blog.br/artigos/2026-07-10-regulacao-do-banco-central-para-fintechs-em-2026): O arcabouço regulatório do Banco Central do Brasil impõe obrigações concretas de governança, compliance e integridade a fintechs, instituições de pagamento e bancos digitais, independentemente de disp
 - [PIX no pagamento de proventos: o que muda](https://fintechs.safie.blog.br/artigos/2026-07-08-pix-no-pagamento-de-proventos-o-que-muda): Mitre Realty e Banco Pine anunciaram o pagamento de proventos a acionistas via PIX, consolidando o uso do meio de pagamento instantâneo em operações societárias formais
 - [Open Finance e dados do IR: o que muda para fintechs](https://fintechs.safie.blog.br/artigos/2026-07-08-open-finance-e-dados-do-ir-o-que-muda-para-fintechs): O ecossistema de Open Finance no Brasil avança na integração de dados financeiros, incluindo informações tributárias como o cashback do Imposto de Renda
 - [OPA e captação: lições para fintechs](https://fintechs.safie.blog.br/artigos/2026-07-06-opa-e-captacao-licoes-para-fintechs): A HBR Realty aprovou a realização de uma Oferta Pública de Aquisição (OPA) para adquirir a Helbor, operação sujeita às regras da CVM e da Lei das S.A
