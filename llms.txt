@@ -6,6 +6,7 @@
 
 ## Artigos
 
+- [Captação e investimento em fintechs: o que saber](https://fintechs.safie.blog.br/artigos/2026-07-13-captacao-e-investimento-em-fintechs-o-que-saber): A distribuição de R$ 2 bilhões em proventos aprovada pelo Santander (SANB11) evidencia como grandes instituições financeiras remuneram capital e sinaliza o padrão de governança e retorno que investido
 - [Open Finance e dados financeiros no Brasil](https://fintechs.safie.blog.br/artigos/2026-07-13-open-finance-e-dados-financeiros-no-brasil): O Open Finance brasileiro é regulado pelo Banco Central por meio da Resolução Conjunta BCB/CMN 1/2020 e suas normas complementares, que estabelecem obrigações graduais de compartilhamento de dados ent
 - [Regulação do Banco Central para fintechs em 2026](https://fintechs.safie.blog.br/artigos/2026-07-10-regulacao-do-banco-central-para-fintechs-em-2026): O arcabouço regulatório do Banco Central do Brasil impõe obrigações concretas de governança, compliance e integridade a fintechs, instituições de pagamento e bancos digitais, independentemente de disp
 - [PIX no pagamento de proventos: o que muda](https://fintechs.safie.blog.br/artigos/2026-07-08-pix-no-pagamento-de-proventos-o-que-muda): Mitre Realty e Banco Pine anunciaram o pagamento de proventos a acionistas via PIX, consolidando o uso do meio de pagamento instantâneo em operações societárias formais
