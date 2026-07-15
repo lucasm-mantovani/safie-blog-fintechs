@@ -6,6 +6,7 @@
 
 ## Artigos
 
+- [PIX em 2026: regras, limites e obrigações](https://fintechs.safie.blog.br/artigos/2026-07-15-pix-em-2026-regras-limites-e-obrigacoes): O PIX é disciplinado pela Resolução BCB 1/2020 e pelo Regulamento do Arranjo PIX, ambos editados pelo Banco Central, e sua participação é obrigatória para instituições com mais de 500 mil contas de cl
 - [Regulação do Banco Central para Fintechs](https://fintechs.safie.blog.br/artigos/2026-07-15-regulacao-do-banco-central-para-fintechs): O Banco Central do Brasil regula fintechs por meio de um conjunto de normas que abrange instituições de pagamento (IPs), sociedades de crédito direto (SCDs) e sociedades de empréstimo entre pessoas (S
 - [Captação e investimento em fintechs: o que saber](https://fintechs.safie.blog.br/artigos/2026-07-13-captacao-e-investimento-em-fintechs-o-que-saber): A distribuição de R$ 2 bilhões em proventos aprovada pelo Santander (SANB11) evidencia como grandes instituições financeiras remuneram capital e sinaliza o padrão de governança e retorno que investido
 - [Open Finance e dados financeiros no Brasil](https://fintechs.safie.blog.br/artigos/2026-07-13-open-finance-e-dados-financeiros-no-brasil): O Open Finance brasileiro é regulado pelo Banco Central por meio da Resolução Conjunta BCB/CMN 1/2020 e suas normas complementares, que estabelecem obrigações graduais de compartilhamento de dados ent
